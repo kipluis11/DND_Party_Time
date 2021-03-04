@@ -1,0 +1,10 @@
+<h1>Active Party Members!</h1>
+<a href="/party_members/new">Create a Character</a>
+<% @party_members.each do |party_member| %>
+    <h2><a href="/party_members/<%= party_member.id %>"><%= party_member.name %></a></h2>
+    <p><%= party_member.race %></p>
+    <p><%= party_member.equipment %></p>
+    <p><%= party_member.background %></p>
+    <a href="/party_members/<%= party_member.id %>/edit">Edit Character</a>
+<% end %>
+    

@@ -1,0 +1,23 @@
+<h1>Edit Chracter info for <%= @party_member.name %></h1>
+<p><%= @error %></p>
+<form action="/party_members/<%=@party_member.id%>" method="post">
+    <input type="hidden" name="_method" value="patch">
+    <label>Name</label>
+    <input type="text" name="party_member[name]" value="<%= @party_member.name %>">
+    
+    <label>Race</label>
+    <input type="text" name="party_member[race]" value="<%= @party_member.race %>">
+    
+    <label>Equipment</label>
+    <input type="text" name="party_member[equipment]" value="<%= @party_member.equipment %>">
+    
+    <label>Background</label>
+    <textarea name="party_member[background]"><%= @party_member.background %></textarea>
+    
+    <button type="submit">Update Character</button>
+</form>
+
+<form action="/party_members/<%=@party_member.id%>" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <button type="submit">Delete Character</button>
+</form>
