@@ -58,10 +58,16 @@ class PartyMembersController < ApplicationController
          # make a 'GET' request to '/party_members/:id/edit'
          get '/party_members/:id/edit' do
             if logged_in? 
+                #/edit has to match :user_id of party member. 
                 @party_member = PartyMember.find(params[:id])
-                erb :'/party_members/edit'
+                if @party_member.user_id == current_user.id
+                    erb :'/party_members/edit'
+                else 
+                    redirect '/party_members'
+                end
             else
                 redirect '/login'
+            
             end
          end
 
@@ -70,14 +76,19 @@ class PartyMembersController < ApplicationController
          # make a 'PUT/PATCH' request to '/party_members/:id'
          patch '/party_members/:id' do
             @party_member = PartyMember.find(params[:id])
+            if @party_member.user_id != current_user.id
+              
+                redirect '/party_members'
+            end
+            
             if !params["party_member"]["name"].empty? && !params["party_member"]["race"].empty? && !params["party_member"]["equipment"].empty? && !params["party_member"]["background"].empty?  
                 @party_member.update(params["party_member"])
-                redirect "/party_members/:id"
+                redirect "/party_members/#{params[:id]}"
           else
                 @error = "Invalid data, please add valid Name and Race."
                 erb :'party_members/edit'
            end
-            @party_member.update(name: params["name"], race: params["race"], equipment: params["equipment"], background: params["background"])
+            #@party_member.update(name: params["name"], race: params["race"], equipment: params["equipment"], background: params["background"])
          end
 
        
@@ -86,9 +97,13 @@ class PartyMembersController < ApplicationController
      # Delete
          # make a 'DELETE' request to '/party_members/:id'
          delete '/party_members/:id' do
-           
-            party_member = PartyMember.find(params[:id])
-            party_member.destroy
+            @party_member = PartyMember.find(params[:id])
+            if @party_member.user_id != current_user.id
+              
+                redirect '/party_members'
+            end
+            
+            @party_member.destroy
             redirect '/party_members'
          end
     

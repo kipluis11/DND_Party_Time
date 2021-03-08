@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
     post '/signup' do
         user = User.new(params)
-        if user.username.empty? || user.password_digest.empty?
+        if user.username.empty? || user.password.empty?
             @error = "Please enter valid username and password"
             erb :'users/signup'
         elsif User.find_by(username: user.username)
