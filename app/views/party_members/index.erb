@@ -5,6 +5,8 @@
     <p><%= party_member.race %></p>
     <p><%= party_member.equipment %></p>
     <p><%= party_member.background %></p>
-    <a href="/party_members/<%= party_member.id %>/edit">Edit Character</a>
+    <% if party_member.user && session[:user_id] == party_member.user.id %>
+        <a href="/party_members/<%= party_member.id %>/edit">Edit Character</a>
+    <% end %>
 <% end %>
     

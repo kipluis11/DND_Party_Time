@@ -15,9 +15,11 @@
     <textarea name="party_member[background]"><%= @party_member.background %></textarea>
     
     <button type="submit">Update Character</button>
+
 </form>
 
 <form action="/party_members/<%=@party_member.id%>" method="post">
     <input type="hidden" name="_method" value="delete">
     <button type="submit">Delete Character</button>
 </form>
+

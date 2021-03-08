@@ -5,14 +5,14 @@ class UsersController < ApplicationController
 
     post '/signup' do
         user = User.new(params)
-        if user.username.empty? || user.password.empty?
+        if user.username.empty? || user.password_digest.empty?
             @error = "Please enter valid username and password"
             erb :'users/signup'
         elsif User.find_by(username: user.username)
-            @error = "That username already exits, please enter a valid username"
+            @error = "That adventurer already exits, please enter a different username for your adventurer"
             erb :'users/signup'
         else
-            user.save
+            user.save #- not using this at this time
             session[:user_id] = user.id
             redirect '/party_members'
         end

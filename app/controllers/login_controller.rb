@@ -5,19 +5,20 @@ class LoginController < ApplicationController
     end
 
     post '/login' do 
-        if params["username"].empty? || params["password"].empty?
-            @error = "Please enter valid username and password"
-            erb :'users/login'
-        else
-            if user = User.find_by(username: params["username"], password: params["password"])
+        #if params["username"].empty? || params["password_digest"].empty?
+            #@error = "Please enter valid username and password"
+            #erb :'users/login'
+        #else
+            if user = User.find_by(username: params["username"], password_digest: params["password_digest"])
                 session[:user_id] = user.id
                 redirect '/party_members'
+                
             else
-                @error = "That username already exits, please enter a valid username"
+                @error = "That adventurer doesn't exist"
                 erb :'users/login' 
             end
-       
-        end
+            
+        #end
     end
 
     get '/logout' do

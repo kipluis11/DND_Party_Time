@@ -1,8 +1,10 @@
 <p><%= @error %></p>
-
+<h2>Please Login Mighty Adventurer!</h2>
 <form action="/login" method="post">
+    <label>User Name</label>
     <input type="text" name="username">
-    <input type="password" name="password">
+    <label>Password</label>
+    <input type="password" name="password_digest">
     <input type="submit" value="Log In">
 
 

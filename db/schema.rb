@@ -10,15 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_12_224710) do
-
-  create_table "party_mambers", force: :cascade do |t|
-    t.string "name"
-    t.string "race"
-    t.string "equipment"
-    t.string "background"
-    t.integer "user_id"
-  end
+ActiveRecord::Schema.define(version: 2021_03_08_060914) do
 
   create_table "party_members", force: :cascade do |t|
     t.string "name"
@@ -30,7 +22,8 @@ ActiveRecord::Schema.define(version: 2021_02_12_224710) do
 
   create_table "users", force: :cascade do |t|
     t.string "username"
-    t.string "password"
+    t.integer "user_id"
+    t.string "password_digest"
   end
 
 end
