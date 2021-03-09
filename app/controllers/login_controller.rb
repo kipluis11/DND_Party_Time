@@ -11,15 +11,17 @@ class LoginController < ApplicationController
         #else
         #end
     post '/login' do
-            user = User.find_by(username: params["username"])
-            if user && user.authenticate(params[:password])
-                session[:user_id] = user.id
-                redirect '/party_members'
+        
+        user = User.find_by(username: params[:username])
+        if user && user.authenticate(params[:password])
+            session[:user_id] = user.id
+            redirect '/party_members'    
                 
-            else
-                @error = "That adventurer doesn't exist"
-                erb :'users/login' 
-            end
+        else
+            @error = "That adventurer doesn't exist"
+            erb :'users/login' 
+        end
+         
     end
 
     get '/logout' do
